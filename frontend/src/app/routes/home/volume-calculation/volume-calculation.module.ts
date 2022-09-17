@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 
 import { VolumeCalculationRoutingModule } from './volume-calculation-routing.module';
 import { VolumeCalculationComponent } from './volume-calculation.component';
+import {SharedModule} from "../../../modules/shared/shared.module";
+import {MuscleGroupModule} from "../../../pipes/muscle-group/muscle-group.module";
 
 
 @NgModule({
@@ -11,7 +13,9 @@ import { VolumeCalculationComponent } from './volume-calculation.component';
   ],
   imports: [
     CommonModule,
-    VolumeCalculationRoutingModule
+    VolumeCalculationRoutingModule,
+    SharedModule,
+    MuscleGroupModule
   ]
 })
 export class VolumeCalculationModule { }
