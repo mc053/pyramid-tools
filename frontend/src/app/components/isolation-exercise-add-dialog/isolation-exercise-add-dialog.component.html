@@ -1,0 +1,23 @@
+<div mat-dialog-title>
+  <div class="flex align-center">
+    <span class="flex-1">Add Isolation Exercise</span>
+  </div>
+</div>
+<mat-dialog-content>
+  <mat-form-field class="full-width">
+    <mat-label>Primary Muscle Group Trained</mat-label>
+    <mat-select *ngIf="muscleGroups">
+      <mat-option *ngFor="let muscleGroup of muscleGroups" [value]="muscleGroup">
+        {{[muscleGroup] | muscleGroup}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field class="full-width">
+    <mat-label>Sets</mat-label>
+    <input matInput type="number" min="0">
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="onAbort()">Cancel</button>
+  <button mat-button (click)="onSave()" color="primary">Add</button>
+</mat-dialog-actions>

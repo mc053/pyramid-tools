@@ -5,6 +5,7 @@ import { VolumeCalculationRoutingModule } from './volume-calculation-routing.mod
 import { VolumeCalculationComponent } from './volume-calculation.component';
 import {SharedModule} from "../../../modules/shared/shared.module";
 import {MuscleGroupModule} from "../../../pipes/muscle-group/muscle-group.module";
+import {IsolationExerciseAddDialogModule} from "../../../components/isolation-exercise-add-dialog/isolation-exercise-add-dialog.module";
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import {MuscleGroupModule} from "../../../pipes/muscle-group/muscle-group.module
     CommonModule,
     VolumeCalculationRoutingModule,
     SharedModule,
-    MuscleGroupModule
+    MuscleGroupModule,
+    IsolationExerciseAddDialogModule
   ]
 })
 export class VolumeCalculationModule { }

@@ -1,19 +1,78 @@
-<table mat-table [dataSource]="movementPatterns" class="mat-elevation-z3" matSort>
+<mat-form-field appearance="standard">
+  <mat-label>Filter</mat-label>
+  <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Squat" #input>
+</mat-form-field>
+
+<div class="mat-elevation-z3">
+  <table mat-table [dataSource]="movementPatterns" matSort>
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Movement Pattern</th>
+      <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="primaryMuscleGroups">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Primary Muscle Groups</th>
+      <td mat-cell *matCellDef="let element">{{ element.primaryMuscleGroups | muscleGroup }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="secondaryMuscleGroups">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Secondary Muscle Groups</th>
+      <td mat-cell *matCellDef="let element">{{ element.secondaryMuscleGroups | muscleGroup }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="amountOfSets">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Sets</th>
+      <td mat-cell *matCellDef="let element">
+        <mat-form-field class="sets">
+          <input matInput type="number" min="0" [(ngModel)]="element.sets">
+        </mat-form-field>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumnsForMovementPatterns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumnsForMovementPatterns"></tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 15]" aria-label="Select page of movement patterns"></mat-paginator>
+</div>
+
+<button mat-raised-button color="accent" (click)="onAddIsolationExercise()">
+  Add Isolation Exercise
+</button>
+<button mat-raised-button class="volume-button" color="primary" (click)="onCalculateVolume()">
+  Calculate Volume
+</button>
+
+<table *ngIf="muscleGroupsVolume" mat-table [dataSource]="muscleGroupsVolume" class="mat-elevation-z3" matSort>
   <ng-container matColumnDef="name">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header>Movement Pattern</th>
-    <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Muscle Group</th>
+    <td mat-cell *matCellDef="let element">{{ [element.name] | muscleGroup }}</td>
   </ng-container>
 
-  <ng-container matColumnDef="primaryMuscleGroups">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header>Primary Muscle Groups</th>
-    <td mat-cell *matCellDef="let element">{{ element.primaryMuscleGroups | muscleGroup }}</td>
+  <ng-container matColumnDef="sets">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header><b>Sets</b></th>
+    <td mat-cell *matCellDef="let element"><b>{{ element.sets }}</b></td>
   </ng-container>
 
-  <ng-container matColumnDef="secondaryMuscleGroups">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header>Secondary Muscle Groups</th>
-    <td mat-cell *matCellDef="let element">{{ element.secondaryMuscleGroups | muscleGroup }}</td>
+  <ng-container matColumnDef="directWork">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Direct Work (primary)</th>
+    <td mat-cell *matCellDef="let element">{{ element.directWork }}</td>
   </ng-container>
 
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  <ng-container matColumnDef="indirectWork">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Indirect Work (secondary)</th>
+    <td mat-cell *matCellDef="let element">{{ element.indirectWork }}</td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumnsForMuscleGroupsVolume"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumnsForMuscleGroupsVolume"></tr>
 </table>
+
+<!-- <button mat-icon-button color="accent">
+  <mat-icon>add</mat-icon>
+</button>
+
+<button mat-icon-button color="accent">
+  <mat-icon>remove</mat-icon>
+</button>
+-->
