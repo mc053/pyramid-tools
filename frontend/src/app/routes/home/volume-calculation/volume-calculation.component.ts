@@ -56,5 +56,16 @@ export class VolumeCalculationComponent implements OnInit {
       maxWidth: '90vw',
       restoreFocus: false
     });
+
+    dialogRef.afterClosed().subscribe(result => {
+      const movementPatterns = this.movementPatterns.data;
+      movementPatterns.push({
+        name: 'Isolation Exercise',
+        sets: result.sets,
+        primaryMuscleGroups: [result.primaryMuscleGroupTrained],
+        secondaryMuscleGroups: []
+      })
+      this.movementPatterns.data = movementPatterns;
+    });
   }
 }

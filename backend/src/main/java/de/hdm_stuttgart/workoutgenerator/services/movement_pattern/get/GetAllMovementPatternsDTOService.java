@@ -91,9 +91,7 @@ public class GetAllMovementPatternsDTOService implements IGetAllMovementPatterns
                     MuscleGroupEnums.CHEST
             ), List.of(
                     MuscleGroupEnums.ANTERIOR_DELTS
-            )),
-            new MovementPatternDTO("Isolation Exercise", 0, List.of(
-            ), List.of())
+            ))
     );
 
     @Override
