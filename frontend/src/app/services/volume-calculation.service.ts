@@ -35,6 +35,11 @@ export class VolumeCalculationService {
   }
 
   async calculateMuscleGroupsVolumeForMovementPatterns(movementPatterns: MovementPattern[]): Promise<MuscleGroupVolume[]> {
-    return MUSCLE_GROUPS_VOLUME_MOCK;
+    if (environment.apiUrl) {
+      const url = `${environment.apiUrl}/muscleGroupsVolume`;
+      return firstValueFrom(this.httpClient.post<MuscleGroupVolume[]>(url, movementPatterns));
+    } else {
+      return MUSCLE_GROUPS_VOLUME_MOCK;
+    }
   }
 }

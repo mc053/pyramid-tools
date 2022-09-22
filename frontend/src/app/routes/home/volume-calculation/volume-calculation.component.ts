@@ -17,6 +17,8 @@ export class VolumeCalculationComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
+  showTable = false;
+
   public movementPatterns!: MatTableDataSource<MovementPattern>;
   public muscleGroupsVolume!: MatTableDataSource<MuscleGroupVolume>;
   public displayedColumnsForMovementPatterns: string[] = ['name', 'primaryMuscleGroups', 'secondaryMuscleGroups', 'amountOfSets'];
@@ -25,20 +27,24 @@ export class VolumeCalculationComponent implements OnInit {
   constructor(private volumeCalculationService: VolumeCalculationService, private dialog: MatDialog) { }
 
   async ngOnInit(): Promise<void> {
-    await this.getAllMovementPatterns();
+    await this.getAllMovementPatternsAndCalculateVolumeInitially();
   }
 
-  async getAllMovementPatterns() {
+  async getAllMovementPatternsAndCalculateVolumeInitially() {
     const movementPatterns = await this.volumeCalculationService.readMovementPatterns();
     this.movementPatterns = new MatTableDataSource(movementPatterns);
-    this.movementPatterns.sort = this.sort;
     this.movementPatterns.paginator = this.paginator;
+    await this.onCalculateVolume();
   }
 
   async onCalculateVolume() {
     const muscleGroupsVolume = await this.volumeCalculationService.calculateMuscleGroupsVolumeForMovementPatterns(this.movementPatterns.data);
     this.muscleGroupsVolume = new MatTableDataSource(muscleGroupsVolume);
     this.muscleGroupsVolume.sort = this.sort;
+  }
+
+  showVolumeTable() {
+    this.showTable = true;
   }
 
   applyFilter(event: Event) {

@@ -8,7 +8,6 @@ export class MuscleGroupPipe implements PipeTransform {
 
   transform(muscleGroups: MuscleGroup[]): string | unknown {
     let result: string[] = [];
-    console.log(muscleGroups);
 
     for (let muscleGroup of muscleGroups) {
       let nameOfMuscleGroup = MuscleGroup[+MuscleGroup[muscleGroup]];
