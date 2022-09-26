@@ -11,11 +11,16 @@ const routes: Routes = [
         loadChildren: () => import('./volume-calculation/volume-calculation.module').then(m => m.VolumeCalculationModule)
       },
       {
+        path: 'more-tools',
+        loadChildren: () => import('./more-tools/more-tools.module').then(m => m.MoreToolsModule)
+      },
+      {
         path: '**',
         redirectTo: 'volume-calculation'
       }
     ]
-}];
+},
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

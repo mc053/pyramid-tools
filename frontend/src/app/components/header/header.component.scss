@@ -5,3 +5,7 @@ app-logo {
 .spacer {
   flex: 1 1 auto;
 }
+
+button.active {
+  color: var(--color-secondary);
+}
