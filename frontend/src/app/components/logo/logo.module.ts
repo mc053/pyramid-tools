@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LogoComponent } from './logo.component';
+import {SharedModule} from "../../modules/shared/shared.module";
 
 
 
@@ -9,7 +10,8 @@ import { LogoComponent } from './logo.component';
     LogoComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    SharedModule
   ],
   exports: [
     LogoComponent
