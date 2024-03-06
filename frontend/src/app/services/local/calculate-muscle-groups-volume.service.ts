@@ -18,16 +18,6 @@ export class CalculateMuscleGroupsVolumeService {
   }
 
   #calculatePrimaryMuscleGroups(muscleGroupsVolumeMap: Map<MuscleGroup, MuscleGroupVolume>, movementPatterns: MovementPattern[]) {
-    // Log the keys of the map to ensure they are what you expect
-    console.log([...muscleGroupsVolumeMap.keys()]);
-
-    // Check if the map has the key 'QUADS'
-    console.log(muscleGroupsVolumeMap.has(MuscleGroup.QUADS));
-
-    // Retrieve the value again
-    const volume = muscleGroupsVolumeMap.get(MuscleGroup.QUADS);
-    console.log(volume); // Ensure it's not undefined
-
     movementPatterns.forEach(m => {
       let primaryMuscleGroups = m.primaryMuscleGroups;
 
