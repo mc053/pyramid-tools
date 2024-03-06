@@ -39,12 +39,11 @@
 <button mat-raised-button color="accent" (click)="onAddIsolationExercise()">
   Add Isolation Exercise
 </button>
-<button mat-raised-button class="volume-button" color="primary" (click)="onCalculateVolume(); showVolumeTable()">
+<button mat-raised-button class="volume-button" color="primary" (click)="onCalculateVolume()">
   Calculate Volume
 </button>
 
-<div *ngIf="showTable">
-  <table mat-table [dataSource]="muscleGroupsVolume" class="mat-elevation-z3"
+<table mat-table [dataSource]="muscleGroupsVolume" class="mat-elevation-z3"
          matSort matSortActive="sets" matSortDirection="desc">
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef>Muscle Group</th>
@@ -52,21 +51,20 @@
     </ng-container>
 
     <ng-container matColumnDef="sets">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header><b>Sets</b></th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header="sets"><b>Sets</b></th>
       <td mat-cell *matCellDef="let element"><b>{{ element.sets }}</b></td>
     </ng-container>
 
     <ng-container matColumnDef="directWork">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Direct Work (primary)</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header="directWork">Direct Work (primary)</th>
       <td mat-cell *matCellDef="let element">{{ element.directWork }}</td>
     </ng-container>
 
     <ng-container matColumnDef="indirectWork">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Indirect Work (secondary)</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header="indirectWork">Indirect Work (secondary)</th>
       <td mat-cell *matCellDef="let element">{{ element.indirectWork }}</td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumnsForMuscleGroupsVolume"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumnsForMuscleGroupsVolume"></tr>
-  </table>
-</div>
+</table>
